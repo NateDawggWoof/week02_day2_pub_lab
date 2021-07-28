@@ -76,3 +76,14 @@ class TestPub(unittest.TestCase):
         self.assertEqual(0, Customer_1.drunkenness)
 
     
+    def test_sell_drink_extension_too_drunken(self):
+        Customer_1 = Customer("John Smith", 100.00, 30)
+        Customer_1.drunkenness = 6
+        self.pub.sell_drink(Customer_1, 'Chang', self.pub)
+    
+        self.assertEqual(100.0, Customer_1.wallet)
+        self.assertEqual(100.0, self.pub.till)
+        self.assertEqual(3, self.pub.number_of_stock())
+        self.assertEqual(0, Customer_1.number_of_drinks_in_hand())
+
+        self.assertEqual(6, Customer_1.drunkenness)
